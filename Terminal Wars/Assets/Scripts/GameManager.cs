@@ -24,24 +24,22 @@ public class GameManager : MonoBehaviour
 		if(Input.GetKeyUp(KeyCode.Return))
 		{
 			int _nextline = _currentline + 1;
-			terminal [_nextline].GetComponent<Text> ().text = "Ousmanes-MacBook-Pro:terminalwars QuanticSymphonia$";
+			terminal[_nextline].GetComponent<Text> ().text = "Ousmanes-MacBook-Pro:terminalwars QuanticSymphonia$";
 			_currentline += 1;
 		}
 		if (Input.GetKeyUp (KeyCode.Backspace)) 
 		{
-			terminal [_currentline].GetComponent<Text> ().text
-			= (terminal [_currentline].GetComponent<Text> ().text).Substring (0, terminal [_currentline].GetComponent<Text> ().text.Length - 1);
-
-			_currentline -= 1;
+			string newString = (terminal [_currentline].GetComponent<Text> ().text).Substring (0, terminal [_currentline].GetComponent<Text> ().text.Length - 2);
+			terminal [_currentline].GetComponent<Text> ().text = newString;
+	 
+			Debug.Log (terminal [_currentline].GetComponent<Text> ().text.Length);
 		}
 
-		else if (Input.inputString != "") 
+		if (Input.inputString != "") 
 		{
 			terminal[_currentline].GetComponent<Text>().text += Input.inputString;
 		}
-
-
-		
+			
 	}
 
 	// Creates a brand new file System For The Game!
