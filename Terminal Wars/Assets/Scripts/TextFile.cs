@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class File
+public class TextFile : SysItem
 {
-	public string name; // Name of File.
+	public string _content;
 
-	public File()
+	public TextFile()
 	{
 
 	}
