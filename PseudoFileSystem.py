@@ -11,7 +11,7 @@ class File():
         return self._parent
 
     def get_title(self):
-        return self._title
+        return self._name
 
     def __str__(self):
         for line in self._lines:
@@ -83,12 +83,14 @@ class FileSystem(Folder):
         temp_list = []
         new_list = []
         temp_list.append(folder.get_title())
-        print(temp_list)
         if not(folder.return_all_items() == False):
             for key in folder.return_all_items():
                 if (type(folder.return_all_items()[key]) is Folder):
                     new_folder = folder.return_all_items()[key]
-                    new_list = self.mapper(new_folder)
+                    new_list += self.mapper(new_folder)
+                else:
+                    new_list.append([folder.return_all_items()[key].get_title()])
+
         if not new_list == []:
             temp_list.append(new_list)
         return temp_list
@@ -169,5 +171,6 @@ def run_terminal():
 fsys = FileSystem()
 fsys.create_folders(['games', 'music', 'docs'])
 games = fsys.get_folder('games')
+games.create_folder('pacman')
 games.create_file('pacman.txt', ['abc', 'def', 'ghi'])
 print(fsys.mapper(fsys))
