@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
 		terminal[0].GetComponent<Text>().text = "Welcome to Terminaltor!";
 		terminal[1].GetComponent<Text>().text = "Your mission should you choose to accept it is...";
-		terminal[2].GetComponent<Text>().text = "Fuck around to the MAX!";
+		terminal[2].GetComponent<Text>().text = "Retreive sensitive government data within this computer. Go.";
 		terminal[3].GetComponent<Text>().text = _currentdirectory + " ";
 
 
@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
 
 			if (cmd_str.StartsWith("ls")) {
 				string[] il = _currentfolder.getItemList ();
-				Debug.Log (il);
 				foreach (string si in il) {
 					terminal [_currentline + 1].GetComponent<Text> ().text = si;
 					_currentline += 1;
