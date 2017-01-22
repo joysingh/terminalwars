@@ -21,6 +21,16 @@ public class Folder: SysItem
 		items.Add (s);
 	}
 
+	public SysItem getItem(string i)
+	{
+		foreach(SysItem si in items) {
+			if (si.getName () == i) {
+				return si;
+			}
+		}
+		return null;
+	}
+
 	public string[] getItemList()
 	{
 		int numItems = items.Count;

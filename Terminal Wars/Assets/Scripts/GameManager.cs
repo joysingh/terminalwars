@@ -57,6 +57,13 @@ public class GameManager : MonoBehaviour
 				_currentline += 1;
 				cmd_str = "";
 
+			} else if (cmd_str.StartsWith ("cd")) {
+				_currentfolder = (Folder)_currentfolder.getItem (cmd_str.Substring (2));
+
+				terminal [_currentline + 1].GetComponent<Text> ().text = _currentdirectory + " ";
+				_currentline += 1;
+				cmd_str = "";
+
 			} else {
 				terminal [_currentline + 1].GetComponent<Text> ().text = " COMMAND NOT FOUND ";
 				_currentline += 1;
