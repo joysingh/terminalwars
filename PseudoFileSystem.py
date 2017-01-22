@@ -145,6 +145,26 @@ class FileSystem(Folder):
             #return ' '.join(return_list)
 
 
+class terminal():
+
+    def __init__(self, file_system):
+        self._input = ''
+        self._file_system = file_system
+
+    def run_ls(self):
+        items = self._file_system.return_all_items()
+
+        l = ['**Empty Directory**']
+        if not (items == False):
+            l = []
+            for t in items:
+                l.append(t)
+        for element in l:
+            print(element)
+
+    def run_pwd(self):
+        title = self._file_system.get_title()
+        print(title)
 
 
 def run_terminal():
@@ -152,25 +172,29 @@ def run_terminal():
     
     fsys = FileSystem()
     fsys.create_folders(['games', 'music', 'docs'])
-    folders = fsys.return_folders()
-    
+    games = fsys.get_folder('games')
+    games.create_folder('pacman')
+    games.create_file('pacman.txt', ['abc', 'def', 'ghi'])
+
+    t = terminal(fsys)
 
     while exit == False:
         user_input = input('\nenter line bruh\n')
         if user_input == '':
             exit = True
         elif user_input == 'ls':
-            path = True
-            return_str = 'root/'
+            t.run_ls()
+        elif user_input == 'pwd':
+            t.run_pwd()
             
-            print(return_str)
                 
 
-#run_terminal()
+run_terminal()
 
-fsys = FileSystem()
-fsys.create_folders(['games', 'music', 'docs'])
-games = fsys.get_folder('games')
-games.create_folder('pacman')
-games.create_file('pacman.txt', ['abc', 'def', 'ghi'])
-print(fsys.mapper(fsys))
+
+#print(fsys.mapper(fsys))
+
+#t = terminal(fsys)
+#input1 = input('>')
+#if input1 == 'ls':
+    #t.run_ls()
