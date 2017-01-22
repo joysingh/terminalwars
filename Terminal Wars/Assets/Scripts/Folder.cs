@@ -5,15 +5,19 @@ using UnityEngine;
 public class Folder: SysItem
 {
 	public List<SysItem> items; // List of items in current folder including sub folders and hidden data.
+	public Folder parent;
 
-	public Folder() : base()
-	{
+	public Folder() : base() {
 		items = new List<SysItem> ();
 	}
 
-	public Folder(string n) : base(n)
-	{ 
+	public Folder(string n) : base(n) { 
 		items = new List<SysItem> ();
+	}
+
+	public Folder (string n, Folder p) : base(n) {
+		items = new List<SysItem> ();
+		parent = p;
 	}
 
 	public void addItem(SysItem s)
@@ -30,6 +34,10 @@ public class Folder: SysItem
 		}
 		return null;
 	}
+	public Folder getParent() {
+		return parent;		
+	}
+
 
 	public string[] getItemList()
 	{

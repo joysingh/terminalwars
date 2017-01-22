@@ -7,9 +7,11 @@ public class GameManager : MonoBehaviour
 {
 	public GameObject[] terminal;
 	public string _currentdirectory;
+	public Folder[] folders;
 	public Folder _currentfolder;
 	public int _currentline;
 	protected string cmd_str;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -50,7 +52,7 @@ public class GameManager : MonoBehaviour
 				cmd_str = "";
 
 			} else if (cmd_str.StartsWith ("mkdir")) {
-				Folder tf = new Folder (cmd_str.Substring(5));
+				Folder tf = new Folder (cmd_str.Substring(5), _currentfolder);
 				_currentfolder.addItem (tf);
 
 				terminal [_currentline + 1].GetComponent<Text> ().text = _currentdirectory + " ";
@@ -58,11 +60,21 @@ public class GameManager : MonoBehaviour
 				cmd_str = "";
 
 			} else if (cmd_str.StartsWith ("cd")) {
-				_currentfolder = (Folder)_currentfolder.getItem (cmd_str.Substring (2));
 
-				terminal [_currentline + 1].GetComponent<Text> ().text = _currentdirectory + " ";
-				_currentline += 1;
-				cmd_str = "";
+				if (cmd_str.StartsWith ("cd ..")) {
+					_currentfolder = (Folder)_currentfolder.getParent ();
+					cmd_str = "";
+
+					terminal [_currentline + 1].GetComponent<Text> ().text = _currentdirectory + " ";
+					_currentline += 1;
+					cmd_str = "";
+				} else {
+					_currentfolder = (Folder)_currentfolder.getItem (cmd_str.Substring (2));
+
+					terminal [_currentline + 1].GetComponent<Text> ().text = _currentdirectory + " ";
+					_currentline += 1;
+					cmd_str = "";
+				}
 
 			} else {
 				terminal [_currentline + 1].GetComponent<Text> ().text = " COMMAND NOT FOUND ";
