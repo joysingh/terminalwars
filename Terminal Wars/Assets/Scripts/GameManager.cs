@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 	public string _currentdirectory;
 	public Folder _currentfolder;
 	public int _currentline;
-	public string cmd_str;
+	protected string cmd_str;
 	// Use this for initialization
 	void Start () 
 	{
@@ -24,23 +24,23 @@ public class GameManager : MonoBehaviour
 
 
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
 		if (Input.GetKeyUp (KeyCode.Return)) {
-			Debug.Log (cmd_str.Equals("ls"));
-			Debug.Log (cmd_str);
 
-			if (cmd_str.Equals("ls")) {
+			if (cmd_str.StartsWith("ls")) {
 				string[] il = _currentfolder.getItemList ();
-				Debug.Log ("penis");
+
 				foreach (string si in il) {
 					terminal [_currentline + 1].GetComponent<Text> ().text = si;
 					_currentline += 1;
 				}
 
 			} else if (cmd_str.StartsWith ("touch")) {
+				TextFile tf = new TextFile ("File 1");
+				_currentfolder.addItem (tf);
 
 			} else {
 				terminal [_currentline + 1].GetComponent<Text> ().text = " COMMAND NOT FOUND ";
