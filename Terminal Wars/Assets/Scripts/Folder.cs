@@ -7,10 +7,14 @@ public class Folder: SysItem
 	public List<SysItem> items; // List of items in current folder including sub folders and hidden data.
 
 	public Folder() : base()
-	{ }
+	{
+		items = new List<SysItem> ();
+	}
 
 	public Folder(string n) : base(n)
-	{ }
+	{ 
+		items = new List<SysItem> ();
+	}
 
 	public void addItem(SysItem s)
 	{
@@ -26,6 +30,7 @@ public class Folder: SysItem
 		foreach(SysItem si in items)
 		{
 			il [c] = si.getName ();
+			c++;
 		}
 
 		return il;

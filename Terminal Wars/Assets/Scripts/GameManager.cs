@@ -32,15 +32,30 @@ public class GameManager : MonoBehaviour
 
 			if (cmd_str.StartsWith("ls")) {
 				string[] il = _currentfolder.getItemList ();
-
+				Debug.Log (il);
 				foreach (string si in il) {
 					terminal [_currentline + 1].GetComponent<Text> ().text = si;
 					_currentline += 1;
 				}
+				terminal [_currentline + 1].GetComponent<Text> ().text = _currentdirectory + " ";
+				_currentline += 1;
+				cmd_str = "";
 
 			} else if (cmd_str.StartsWith ("touch")) {
-				TextFile tf = new TextFile ("File 1");
+				TextFile tf = new TextFile (cmd_str.Substring(5));
 				_currentfolder.addItem (tf);
+
+				terminal [_currentline + 1].GetComponent<Text> ().text = _currentdirectory + " ";
+				_currentline += 1;
+				cmd_str = "";
+
+			} else if (cmd_str.StartsWith ("mkdir")) {
+				Folder tf = new Folder (cmd_str.Substring(5));
+				_currentfolder.addItem (tf);
+
+				terminal [_currentline + 1].GetComponent<Text> ().text = _currentdirectory + " ";
+				_currentline += 1;
+				cmd_str = "";
 
 			} else {
 				terminal [_currentline + 1].GetComponent<Text> ().text = " COMMAND NOT FOUND ";
